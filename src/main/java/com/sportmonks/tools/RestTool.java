@@ -30,9 +30,7 @@ public class RestTool {
         for (Map.Entry<String, Object> additionalParam : additionalParams.entrySet())
             url += "&" + additionalParam.getKey() + "=" + additionalParam.getValue();
         
-        
         final GetRequest getRequest = Unirest.get(url);
-        System.out.println(url);
 
         config(getRequest, params);
 
