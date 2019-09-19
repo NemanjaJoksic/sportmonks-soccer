@@ -30,7 +30,19 @@ public class RestTool {
         for (Map.Entry<String, Object> additionalParam : additionalParams.entrySet())
             url += "&" + additionalParam.getKey() + "=" + additionalParam.getValue();
         
-        return get(url, params, clazz);
+        
+        final GetRequest getRequest = Unirest.get(url);
+        System.out.println(url);
+
+        config(getRequest, params);
+
+        try {
+            return getRequest.asObject(clazz);
+        } catch (UnirestException ue) {
+            System.out.println("APIClient Exception : " + ue.getMessage());
+        }
+        return null;
+        
     }
 
     /**
@@ -47,7 +59,6 @@ public class RestTool {
         config(getRequest, params);
 
         try {
-
             return getRequest.asObject(clazz);
         } catch (UnirestException ue) {
             System.out.println("APIClient Exception : " + ue.getMessage());
