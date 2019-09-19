@@ -15,44 +15,62 @@ import com.sportmonks.endpoints.AbstractEndPoint;
  */
 public class RestTool {
 
-	/**
-	 * @param baseUrl
-	 * @param params
-	 * @param clazz
-	 * @param <T>
-	 * @return
-	 */
-	public static <T> HttpResponse<T> get(final String baseUrl, final Map<String, String> params, final Class<T> clazz) {
+    /**
+     * @param baseUrl
+     * @param params
+     * @param additionalParams
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> HttpResponse<T> get(final String baseUrl, final Map<String, String> params,
+            final Map<String, Object> additionalParams, final Class<T> clazz) {
 
-		final GetRequest getRequest = Unirest.get(baseUrl + AbstractEndPoint.COMMON_URL_PARAMS);
+        String url = baseUrl + AbstractEndPoint.COMMON_URL_PARAMS;
+        for (Map.Entry<String, Object> additionalParam : additionalParams.entrySet())
+            url += "&" + additionalParam.getKey() + "=" + additionalParam.getValue();
+        
+        return get(url, params, clazz);
+    }
 
-		config(getRequest, params);
+    /**
+     * @param baseUrl
+     * @param params
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> HttpResponse<T> get(final String baseUrl, final Map<String, String> params, final Class<T> clazz) {
 
-		try {
+        final GetRequest getRequest = Unirest.get(baseUrl + AbstractEndPoint.COMMON_URL_PARAMS);
 
-			return getRequest.asObject(clazz);
-		} catch (UnirestException ue) {
-			System.out.println("APIClient Exception : " + ue.getMessage());
-		}
-		return null;
-	}
+        config(getRequest, params);
 
-	/**
-	   * @param httpRequest
-	   * @param params
-	   */
-	private static void config(final HttpRequest httpRequest, final Map<String, String> params) {
-		httpRequest.routeParam("api_token", APIClient.getInstance().getApiToken());
+        try {
 
-		if (params != null && !params.isEmpty()) {
-			for (Map.Entry<String, String> param : params.entrySet()) {
-				httpRequest.routeParam(param.getKey(), param.getValue());
-			}
-		} else {
-			httpRequest.routeParam("includes", "");
-		}
+            return getRequest.asObject(clazz);
+        } catch (UnirestException ue) {
+            System.out.println("APIClient Exception : " + ue.getMessage());
+        }
+        return null;
+    }
 
-		httpRequest.header("Accept", "application/json");
-	}
+    /**
+     * @param httpRequest
+     * @param params
+     */
+    private static void config(final HttpRequest httpRequest, final Map<String, String> params) {
+        httpRequest.routeParam("api_token", APIClient.getInstance().getApiToken());
+
+        if (params != null && !params.isEmpty()) {
+            for (Map.Entry<String, String> param : params.entrySet()) {
+                httpRequest.routeParam(param.getKey(), param.getValue());
+            }
+        } else {
+            httpRequest.routeParam("includes", "");
+        }
+
+        httpRequest.header("Accept", "application/json");
+    }
 
 }
