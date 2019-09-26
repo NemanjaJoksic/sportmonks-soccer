@@ -64,8 +64,6 @@ public class CountriesEndPoint extends AbstractEndPoint {
 
 	private List<Country> findSeverals(final String url, final CountriesEndPointParams params) {
 
-		lastCall = waitBeforeNextCall(lastCall);
-
 		final List<Country> response = new ArrayList<>();
 
 		final Map<String, String> paramsMap = new HashMap<>();
@@ -76,7 +74,8 @@ public class CountriesEndPoint extends AbstractEndPoint {
 			}
 		}
 
-		final HttpResponse<Countries> httpResponse = RestTool.get(url, paramsMap, Countries.class);
+		final HttpResponse<Countries> httpResponse = RestTool.get(url, paramsMap, 
+                        params.getAdditionalParams(), Countries.class);
 		final Countries body = httpResponse.getBody();
 		if (body != null) {
 			response.addAll(body.getData());

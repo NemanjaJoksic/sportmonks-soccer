@@ -62,8 +62,6 @@ public class SeasonsEndPoint extends AbstractEndPoint {
 
 	private List<Season> findSeverals(final String url, final SeasonsEndPointParams params) {
 
-		lastCall = waitBeforeNextCall(lastCall);
-
 		final Map<String, String> paramsMap = new HashMap<>();
 		if (params != null) {
 			paramsMap.put("includes", params.getRelations());
@@ -72,7 +70,8 @@ public class SeasonsEndPoint extends AbstractEndPoint {
 			}
 		}
 
-		final HttpResponse<Seasons> httpResponse = RestTool.get(url, paramsMap, Seasons.class);
+		final HttpResponse<Seasons> httpResponse = RestTool.get(url, paramsMap,
+                        params.getAdditionalParams(), Seasons.class);
 
 		final List<Season> response = new ArrayList<>();
 		response.addAll(httpResponse.getBody().getData());

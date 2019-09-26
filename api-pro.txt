@@ -1,4 +1,3 @@
-https://soccer.sportmonks.com/api/v2.0?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
 https://soccer.sportmonks.com/api/v2.0/fixtures/date/2019-08-18?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
 https://soccer.sportmonks.com/api/v2.0/odds/fixture/11865391?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
 https://soccer.sportmonks.com/api/v2.0/fixtures/between/2019-09-17/2019-09-27?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
@@ -17,3 +16,7 @@ FIXTURE(ID, HOME_ID, GUEST_ID, DATE)
 BOOKMAKER(ID, NAME)
 ODD(ID, FIXTURE_ID, BOOKMAKER_ID, 1, X, 2, LAST_UPDATED)
 SURE_BET(ID, ODD_ID1, ODD_IDX, ODD_ID2)
+
+https://soccer.sportmonks.com/api/v2.0/leagues?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
+https://soccer.sportmonks.com/api/v2.0/seasons?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW
+https://soccer.sportmonks.com/api/v2.0/countries?api_token=OsmuqZeSStbmxK4DQflCh508S07efpiaJbWhQo9QoD3tpBmpkvqQzsyKaNtW

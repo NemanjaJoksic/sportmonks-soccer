@@ -116,7 +116,8 @@ public class TeamsEndPoint extends AbstractEndPoint {
             }
         }
 
-        final HttpResponse<Teams> httpResponse = RestTool.get(url, paramsMap, Teams.class);
+        final HttpResponse<Teams> httpResponse = RestTool.get(url, paramsMap,
+                params.getAdditionalParams(), Teams.class);
 
         final List<Team> response = new ArrayList<>();
         if (httpResponse != null) {
