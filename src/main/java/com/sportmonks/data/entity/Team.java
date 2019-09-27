@@ -17,7 +17,7 @@ import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"id", "legacy_id", "name", "twitter", "country_id", "national_team", "founded", "logo_path", "venue_id", "squad", "venue", "coach",
-    "fifaranking", "uefaranking"})
+    "fifaranking", "uefaranking", "short_code"})
 public class Team {
 
     @JsonProperty("id")
@@ -48,6 +48,8 @@ public class Team {
     private FifaRanking fifaRanking;
     @JsonProperty("uefaranking")
     private UefaRanking uefaRanking;
+    @JsonProperty("short_code")
+    private String shortCode;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -189,6 +191,14 @@ public class Team {
     @JsonProperty("uefaRanking")
     public void setUefaRanking(UefaRanking uefaRanking) {
         this.uefaRanking = uefaRanking;
+    }
+
+    public String getShortCode() {
+        return shortCode;
+    }
+
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
     }
 
     @JsonAnyGetter
